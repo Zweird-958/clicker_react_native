@@ -1,5 +1,5 @@
-import { Button, Pressable, Text, View } from 'react-native';
 import { styled } from 'nativewind';
+import { Pressable, Text } from 'react-native';
 const StyledText = styled(Text)
 const StyledPressable = styled(Pressable)
 
