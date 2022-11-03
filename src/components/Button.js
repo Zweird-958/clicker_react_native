@@ -1,7 +1,8 @@
 import { styled } from 'nativewind';
-import { Pressable, Text } from 'react-native';
+import { Pressable, Text, Animated } from 'react-native';
 const StyledText = styled(Text)
 const StyledPressable = styled(Pressable)
+
 
 const MainButton =  (props) => {
     return(

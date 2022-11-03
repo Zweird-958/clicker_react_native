@@ -1,8 +1,9 @@
-import React, { useState } from "react";
 import { withExpoSnack } from "nativewind";
+import React, { useState } from "react";
 
-import { Button, Pressable, Text, View } from "react-native";
 import { styled } from "nativewind";
+import { Button, Pressable, Text, View } from "react-native";
+
 import MainButton from "./components/Button";
 import InfoText from "./components/InfoText";
 
@@ -17,6 +18,8 @@ const INITIAL_STATE = {
   cpc: 1,
 };
 
+const SHOP_HEADING = ["NAME","CPS","CPC","PRICE","OWNED"]
+
 const Home = () => {
   const [state, setState] = useState(INITIAL_STATE);
   const upMoney = () => {
@@ -27,6 +30,7 @@ const Home = () => {
   const toggleStore = () => {
     setStore(!store);
   };
+
 
   return (
     <StyledView>
@@ -42,12 +46,28 @@ const Home = () => {
         <MainButton className="bg-blue-500" onPress={upMoney}>
           work
         </MainButton>
-        <MainButton className="bg-green-500" onPress={toggleStore}>
+        <MainButton
+          className="bg-green-500"
+          onPress={toggleStore}
+          style={[{ transform: [{ scale: 2 }] }]}
+        >
           store
         </MainButton>
 
         <StyledView className={`${store ? "" : "hidden"}`}>
-          <StyledText>STORE</StyledText>
+          <StyledView className="flex flex-row">
+            {SHOP_HEADING.map(e =>
+            <StyledText className="w-20">{e}</StyledText>
+
+            )}
+            {/* <StyledText className="w-20">NAME</StyledText>
+            <StyledText className="w-20">PRICE</StyledText> */}
+          </StyledView>
+          <StyledView className="flex flex-row">
+            <StyledText className="w-20">Basic Miner</StyledText>
+            <StyledText className="w-20">100$</StyledText>
+          </StyledView>
+          {/* <StyledText>STORE</StyledText> */}
         </StyledView>
 
         <MainButton className="bg-red-500">reset</MainButton>
