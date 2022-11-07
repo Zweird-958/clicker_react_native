@@ -2,12 +2,12 @@ import { withExpoSnack } from "nativewind";
 import React, { useState } from "react";
 
 import { styled } from "nativewind";
-import { Button, Pressable, Text, View } from "react-native";
+import { Button, Pressable, Text, View, Animated } from "react-native";
 
 import MainButton from "./components/Button";
 import InfoText from "./components/InfoText";
 
-const StyledView = styled(View);
+const StyledView = styled(Animated.View);
 const StyledText = styled(Text);
 const StyledButton = styled(Button);
 const StyledPressable = styled(Pressable);
@@ -17,6 +17,13 @@ const INITIAL_STATE = {
   cps: 0,
   cpc: 1,
 };
+
+const test = Animated.Value(1)
+
+// const Toaster = () => {
+//   Animated.spring(test,
+//     )
+// };
 
 const SHOP_HEADING = ["NAME", "CPS", "CPC", "PRICE", "OWNED"];
 
@@ -54,6 +61,7 @@ const Home = () => {
           store
         </MainButton>
 
+        <MainButton className={"bg-red-600"} onPress={Toaster}>TOASTER</MainButton>
         <StyledView className={`${store ? "" : "hidden"}`}>
           <StyledView className="flex flex-row">
             {SHOP_HEADING.map((e) => (
