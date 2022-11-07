@@ -18,7 +18,7 @@ const INITIAL_STATE = {
   cpc: 1,
 };
 
-const SHOP_HEADING = ["NAME","CPS","CPC","PRICE","OWNED"]
+const SHOP_HEADING = ["NAME", "CPS", "CPC", "PRICE", "OWNED"];
 
 const Home = () => {
   const [state, setState] = useState(INITIAL_STATE);
@@ -31,6 +31,9 @@ const Home = () => {
     setStore(!store);
   };
 
+  const resetState = () => {
+    setState(INITIAL_STATE);
+  };
 
   return (
     <StyledView>
@@ -38,9 +41,6 @@ const Home = () => {
         <InfoText>CPC : {state.cpc}</InfoText>
         <InfoText>${state.money}</InfoText>
         <InfoText>CPS : {state.cps}</InfoText>
-        {/* <StyledText style={{color: "white"}} className="mt-5 mx-5 px-3"></StyledText>
-        <StyledText style={{color: "white"}} className="mt-5 mx-5 px-3">${state.money}</StyledText>
-        <StyledText style={{color: "white"}} className="mt-5 mx-5 px-3">CPS : {state.cps}</StyledText> */}
       </StyledView>
       <StyledView className="flex-1 items-center justify-center">
         <MainButton className="bg-blue-500" onPress={upMoney}>
@@ -56,12 +56,9 @@ const Home = () => {
 
         <StyledView className={`${store ? "" : "hidden"}`}>
           <StyledView className="flex flex-row">
-            {SHOP_HEADING.map(e =>
-            <StyledText className="w-20">{e}</StyledText>
-
-            )}
-            {/* <StyledText className="w-20">NAME</StyledText>
-            <StyledText className="w-20">PRICE</StyledText> */}
+            {SHOP_HEADING.map((e) => (
+              <StyledText className="w-20">{e}</StyledText>
+            ))}
           </StyledView>
           <StyledView className="flex flex-row">
             <StyledText className="w-20">Basic Miner</StyledText>
@@ -70,7 +67,9 @@ const Home = () => {
           {/* <StyledText>STORE</StyledText> */}
         </StyledView>
 
-        <MainButton className="bg-red-500">reset</MainButton>
+        <MainButton className="bg-red-500" onPress={resetState}>
+          reset
+        </MainButton>
       </StyledView>
     </StyledView>
   );
