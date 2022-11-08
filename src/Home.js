@@ -1,46 +1,33 @@
-import { withExpoSnack } from "nativewind";
-import React, { useState } from "react";
-
 import { styled } from "nativewind";
-import { Button, Pressable, Text, View, Animated } from "react-native";
-
+import React, { useContext, useState } from "react";
+import { Animated, Button, Pressable, Text } from "react-native";
 import MainButton from "./components/Button";
 import InfoText from "./components/InfoText";
+import Table from "./components/Table";
+import { SHOP_HEADING } from "./config";
+import { SHOP_ITEMS_BUYABLE } from "./config"
+import { StoreContext } from "./contexts/StoreContext";
+import { StateContext } from "./contexts/StateContext";
 
 const StyledView = styled(Animated.View);
 const StyledText = styled(Text);
 const StyledButton = styled(Button);
 const StyledPressable = styled(Pressable);
 
-const INITIAL_STATE = {
-  money: 0,
-  cps: 0,
-  cpc: 1,
-};
 
-const test = Animated.Value(1)
-
-// const Toaster = () => {
-//   Animated.spring(test,
-//     )
-// };
-
-const SHOP_HEADING = ["NAME", "CPS", "CPC", "PRICE", "OWNED"];
 
 const Home = () => {
-  const [state, setState] = useState(INITIAL_STATE);
-  const upMoney = () => {
-    setState({ ...state, money: state.money + 1 });
-  };
+  
+  const { state, upMoney, resetData, item } = useContext(StateContext);
 
-  const [store, setStore] = useState(false);
-  const toggleStore = () => {
-    setStore(!store);
-  };
+  // const [item, setItem] = useState(SHOP_ITEMS_BUYABLE);
 
-  const resetState = () => {
-    setState(INITIAL_STATE);
-  };
+
+  const { toggleStore, store} = useContext(StoreContext);
+
+  
+
+  
 
   return (
     <StyledView>
@@ -61,21 +48,10 @@ const Home = () => {
           store
         </MainButton>
 
-        <MainButton className={"bg-red-600"} onPress={Toaster}>TOASTER</MainButton>
-        <StyledView className={`${store ? "" : "hidden"}`}>
-          <StyledView className="flex flex-row">
-            {SHOP_HEADING.map((e) => (
-              <StyledText className="w-20">{e}</StyledText>
-            ))}
-          </StyledView>
-          <StyledView className="flex flex-row">
-            <StyledText className="w-20">Basic Miner</StyledText>
-            <StyledText className="w-20">100$</StyledText>
-          </StyledView>
-          {/* <StyledText>STORE</StyledText> */}
-        </StyledView>
 
-        <MainButton className="bg-red-500" onPress={resetState}>
+        <Table head={SHOP_HEADING} body={item}/>
+
+        <MainButton className="bg-red-500" onPress={resetData}>
           reset
         </MainButton>
       </StyledView>
@@ -83,13 +59,7 @@ const Home = () => {
   );
 };
 
-// const styles = StyleSheet.create({
-//   .wFit{
-//     width: 'fit-content',
-//   }
-// })
-
 // This demo is using a external compiler that will only work in Expo Snacks.
 // You may see flashes of unstyled content, this will not occur under normal use!
 // Please see the documentation to setup your Homelication
-export default withExpoSnack(Home);
+export default Home;
